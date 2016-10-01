@@ -1,0 +1,18 @@
+<html>
+	<head>
+		<title>GitHub Visualization</title>
+		<script src="./javascripts/jquery.min.js" type="text/javascript"></script>
+		<script src="./javascripts/app.js" type="text/javascript"></script>
+		<script src="./javascripts/d3.min.js" type="text/javascript"></script>
+	</head>
+
+	<body>
+		<h1>Tungnk1993 GitHub Projects</h1>
+		<div id="my-github-projects"></div>
+		<script type="text/javascript">
+		$(function() {
+			$("#my-github-projects").loadRepositories("tungnk1993");
+		});
+		</script>
+	</body>
+</html>
