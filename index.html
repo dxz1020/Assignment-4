@@ -1,18 +1,37 @@
 <html>
-	<head>
-		<title>GitHub Visualization</title>
-		<script src="./javascripts/jquery.min.js" type="text/javascript"></script>
-		<script src="./javascripts/app.js" type="text/javascript"></script>
-		<script src="./javascripts/d3.min.js" type="text/javascript"></script>
-	</head>
+<head>
+<title>GitHub Visualization</title>
+<script src="./javascripts/jquery.min.js" type="text/javascript"></script>
+<script src="./javascripts/app.js" type="text/javascript"></script>
+<script src="./javascripts/d3.min.js" type="text/javascript"></script>
+</head>
 
-	<body>
-		<h1>Tungnk1993 GitHub Projects</h1>
-		<div id="my-github-projects"></div>
-		<script type="text/javascript">
-		$(function() {
-			$("#my-github-projects").loadRepositories("tungnk1993");
-		});
-		</script>
-	</body>
+<body>
+
+	<div class="row">
+		<div class="large-centered columns center-text">
+			<h2>GitHub Language Visualization</h2>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="small-9 columns">
+			<input type="text" placeholder="Enter username" id="term" />
+			<button id="search" class="button tiny radius">Search</button>
+			<button id="clear" class="button tiny radius">Clear</button>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="small-6 large-centered columns center-text" id="username">
+		</div>
+	</div>
+
+	<div class="row">
+		<ol id="langDetails"></ol>
+	</div>
+	
+	<div class="large-7 medium-7 small-12 columns" id="chart"></div>
+
+</body>
 </html>

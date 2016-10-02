@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+.center-text {
+	text-align: center;
+}
+
+input {
+	width: 100%;
+	font-size: 14px;
+	line-height: 2em;
+}

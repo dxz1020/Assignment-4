@@ -1,28 +1,44 @@
-jQuery.githubUser = function(username, callback) {
-   jQuery.getJSON('https://api.github.com/users/'+username+'/repos?callback=?',callback)
-}
- 
-jQuery.fn.loadRepositories = function(username) {
-    this.html("<span>Querying GitHub for " + username +"'s repositories...</span>");
-     
-    var target = this;
-    $.githubUser(username, function(data) {
-        var repos = data.data; // JSON Parsing
-        sortByName(repos);    
-     
-        var list = $('<dl/>');
-        target.empty().append(list);
-        $(repos).each(function() {
-            if (this.name != (username.toLowerCase()+'.github.com')) {
-                list.append('<dt><a href="'+ (this.homepage?this.homepage:this.html_url) +'">' + this.name + '</a> <em>'+(this.language?('('+this.language+')'):'')+'</em></dt>');
-                list.append('<dd>' + this.description +'</dd>');
-            }
-        });      
-      });
-      
-    function sortByName(repos) {
-        repos.sort(function(a,b) {
-        return a.name - b.name;
-       });
-    }
-};
+$(document).ready(function(){
+	$("#search").click(function(){
+		clearCanvas();
+
+		var searchterm = $("#term").val() ? $("#term").val() : "tungnk1993/scrapy";
+
+		getRepoLanguages(showLangs);
+
+		function getRepoLanguages(showLangs){
+			$.get("https://api.github.com/repos/" + searchterm  + "/languages", 
+					function(data, status){
+				console.log(status);
+				success: showLangs(data,status,searchterm);
+			});
+		};
+
+		function showLangs(data, status, repo){
+			var dataset = [];
+			$("#username").append("<h3>" + searchterm + "</h3>");
+			for (var key in data) {
+				if (data.hasOwnProperty(key)) {
+					$("#langDetails").append("<li>" + key + ": " + data[key] + "</li>");
+					var item = new Object();
+					item.key = key;
+					item.value = data[key];
+					dataset.push(item);
+				};
+			};
+			console.log(dataset); // for checking
+		};
+	});
+
+	$("#clear").click(function(){
+		$("#term").val('');//clear out input box
+		clearCanvas();
+	});
+
+	// clear the elements out
+	var clearCanvas = function(){
+		$("li").remove(); // clear out list items
+		$("h3").remove(); // clear out username heading
+		d3.selectAll("svg").remove(); // clear out chart
+	};
+});
