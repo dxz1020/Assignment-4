@@ -21,7 +21,7 @@ $(document).ready(function(){
 			var dataset=[];
 			for (var key in data) {
 				if (data.hasOwnProperty(key)) {
-					$("#langDetails").append("<li>" + key + ": " + data[key] + "</li>");
+					$("#langDetails").append("<li>" + key + ": " + data[key] + " characters</li>");
 					var item = new Object();
 					item.key = key;
 					item.value = data[key];
